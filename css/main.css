@@ -1,0 +1,149 @@
+/**************************************************
+MOBILE FIRST LAYOUT
+**************************************************/
+
+@import url('https://fonts.googleapis.com/css?family=Bree+Serif|Open+Sans:400,700');
+
+* {
+  padding: 0;
+  margin: 0;
+  box-sizing: border-box;
+}
+
+html {
+  font-size: 16px;
+  line-height: 1.6;
+  font-family: 'Open Sans', 'Helvetica', 'Arial', sans-serif;
+  color: #556;
+}
+
+h1 {
+  font: bold 3.5em 'Bree Serif', 'Times', 'Times New Roman', serif;
+  text-shadow: 0 0 1px #000;
+}
+
+li,
+p,
+input,
+label {
+  font: 1.3rem 'Open Sans', 'Helvetica', 'Arial', sans-serif;
+  padding: 0.3em 0;
+}
+
+input[type=number]::-webkit-inner-spin-button,
+input[type=number]::-webkit-outer-spin-button {
+  opacity: 1;
+}
+
+button {
+  font: 2.0em 'Bree Serif', 'Times', 'Times New Roman', serif;
+  text-shadow: 0 0 1px #000;
+  text-align: center;
+  border: 0.4em groove #b3b3c7;
+  display: block;
+  margin: 0 auto;
+  transition: all 0.50s;
+  background-color: #b3b3c7;
+}
+
+button:hover {
+  filter: brightness(130%);
+  transition: all 0.50s;
+}
+
+.page {
+  width: 95%;
+  margin: 0.5em auto;
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+  border-radius: 5px;
+  background-color: #eee;
+  display: none;
+}
+
+.active {
+  display: inherit;
+}
+
+header {
+  width: 100%;
+  color: #EEE;
+  padding: 1em;
+  background-position: center center;
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-color: #b3b3c7;
+  border-radius: 5px 5px 0 0;
+  border-bottom: 2px solid #eee;
+  transition: all 0.5s;
+}
+
+footer {
+  width: 100%;
+  margin-top: 0.5em;
+  padding: 1em;
+  background-color: #b3b3c7;
+  color: #eee;
+  border-radius: 0 0 5px 5px;
+}
+
+footer p {
+  font-size: 1em;
+}
+
+.num_list {
+  width: 100%;
+}
+
+.num_list li {
+  width: 100%;
+  list-style: none;
+  display: inline-block;
+  text-align: center;
+  text-decoration: none;
+  color: #eee;
+  border-bottom: 2px solid #EEE;
+  background-color: #556;
+  transition: background 0.5s;
+}
+
+@media screen and (min-width:400px) {
+  h1 {
+    font-size: 5em;
+    transition: all 0.5s;
+  }
+  li {
+    font-size: 2.5em;
+        transition: all 0.5s;
+  }
+  .formBox input, .formBox label, .formBox span{
+    font-size: 1.7em;
+        transition: all 0.5s;
+  }
+  .page{
+    width: 90%;
+        transition: background 0.5s;
+  }
+  .num_list li {
+    width: 50%;
+    transition: background 0.5s;
+  }
+}
+@media screen and (min-width: 900px) {
+  .page {
+    width: 85%;
+  }
+  .num_list li {
+    width: 33%;
+    transition: background 0.5s;
+  }
+}
+
+@media screen and (min-width: 1200px) {
+  .page {
+    width: 80%;
+  }
+  .num_list li {
+    width: 25%;
+    transition: background 0.5s;
+  }
+}
