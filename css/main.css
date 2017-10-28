@@ -15,7 +15,7 @@ html {
 }
 
 h1 {
-  font: bold 3.5em Neuton, Palatino, 'Hoefler Text', Times, 'Times New Roman', serif;
+  font: 3.5em Neuton, Palatino, 'Hoefler Text', Times, 'Times New Roman', serif;
   text-shadow: 0 3px 0px #000,
   0 14px 10px rgba(0, 0, 0, 0.15),
   0 24px 2px rgba(0, 0, 0, 0.1),
