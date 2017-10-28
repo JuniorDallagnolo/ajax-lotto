@@ -46,7 +46,7 @@ function genNumbers() {
     }
   })
     .catch((err) => {
-     alert("ERROR: ", err.message);
+     alert("ERROR: Please fill input fields", err.message);
     })
 }
 function refresh() {
