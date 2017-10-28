@@ -46,7 +46,7 @@ function genNumbers() {
     }
   })
     .catch((err) => {
-      console.log("ERROR: ", err.message);
+     alert("ERROR: ", err.message);
     })
 }
 function refresh() {
