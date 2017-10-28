@@ -1,8 +1,4 @@
-/**************************************************
-MOBILE FIRST LAYOUT
-**************************************************/
-
-@import url('https://fonts.googleapis.com/css?family=Bree+Serif|Open+Sans:400,700');
+@import url('https://fonts.googleapis.com/css?family=Fira+Sans|Neuton');
 
 * {
   padding: 0;
@@ -13,21 +9,26 @@ MOBILE FIRST LAYOUT
 html {
   font-size: 16px;
   line-height: 1.6;
-  font-family: 'Open Sans', 'Helvetica', 'Arial', sans-serif;
-  color: #556;
+  font-family: 'Fira Sans', Geneva, Verdana, Helvetica, Arial, sans-serif;
+  color: #000;
+  background-color: black;
 }
 
 h1 {
-  font: bold 3.5em 'Bree Serif', 'Times', 'Times New Roman', serif;
-  text-shadow: 0 0 1px #000;
+  font: bold 3.5em Neuton, Palatino, 'Hoefler Text', Times, 'Times New Roman', serif;
+  text-shadow: 0 3px 0px #000,
+  0 14px 10px rgba(0, 0, 0, 0.15),
+  0 24px 2px rgba(0, 0, 0, 0.1),
+  0 34px 30px rgba(0, 0, 0, 0.1);
 }
 
 li,
 p,
 input,
 label {
-  font: 1.3rem 'Open Sans', 'Helvetica', 'Arial', sans-serif;
+  font: 1.3rem 'Fira Sans', Geneva, Verdana, Helvetica, Arial, sans-serif;
   padding: 0.3em 0;
+  text-align: center;
 }
 
 input[type=number]::-webkit-inner-spin-button,
@@ -36,14 +37,15 @@ input[type=number]::-webkit-outer-spin-button {
 }
 
 button {
-  font: 2.0em 'Bree Serif', 'Times', 'Times New Roman', serif;
+  font: 2.0em Neuton, Palatino, 'Hoefler Text', Times, 'Times New Roman', serif;
   text-shadow: 0 0 1px #000;
   text-align: center;
-  border: 0.4em groove #b3b3c7;
+  border: 0.5em groove #AAA;
   display: block;
   margin: 0 auto;
   transition: all 0.50s;
-  background-color: #b3b3c7;
+  background-color: #AAA;
+  border-radius: 20px;
 }
 
 button:hover {
@@ -56,7 +58,7 @@ button:hover {
   margin: 0.5em auto;
   box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
   border-radius: 5px;
-  background-color: #eee;
+  background-color: #CCC;
   display: none;
 }
 
@@ -68,10 +70,7 @@ header {
   width: 100%;
   color: #EEE;
   padding: 1em;
-  background-position: center center;
-  background-repeat: no-repeat;
-  background-size: cover;
-  background-color: #b3b3c7;
+  background-color: #ABC;
   border-radius: 5px 5px 0 0;
   border-bottom: 2px solid #eee;
   transition: all 0.5s;
@@ -81,7 +80,7 @@ footer {
   width: 100%;
   margin-top: 0.5em;
   padding: 1em;
-  background-color: #b3b3c7;
+  background-color: #ABC;
   color: #eee;
   border-radius: 0 0 5px 5px;
 }
@@ -139,6 +138,10 @@ footer p {
 }
 
 @media screen and (min-width: 1200px) {
+  h1{
+    text-align: center;
+    font-size: 6.0em;
+  }
   .page {
     width: 80%;
   }
