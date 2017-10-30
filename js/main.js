@@ -1,4 +1,5 @@
 const LNK = 'https://griffis.edumedia.ca/mad9014/lotto/nums.php';
+var numsArray = [];
 
 //Event Handlers
 function init() {
@@ -33,7 +34,11 @@ function genNumbers() {
     if (jsonData.code == 0){
       let ul = document.querySelector('.num_list')
       let newDF = new DocumentFragment();
-      jsonData.numbers.forEach((num) => {
+      numsArray = jsonData.numbers.unique();
+      if (numsArray.length < jsonData.numbers.length){
+        document.getElementById('duplicate').innerHTML = "Duplicate number values were hidden. Try a new search with a higher range to avoid that";
+      }
+      numsArray.forEach((num) => {
         let li = document.createElement('li');
         li.textContent = num;
         newDF.appendChild(li);
@@ -50,7 +55,17 @@ function genNumbers() {
     })
 }
 function refresh() {
+  document.getElementById('duplicate').innerHTML = "";
   document.querySelector('.num_list').innerHTML = "";
   document.getElementById('list').classList.toggle('active');
   document.getElementById('home').classList.toggle('active');
+}
+
+Array.prototype.unique = function () {
+  return this.reduce(function (accum, current) {
+    if (accum.indexOf(current) < 0) {
+      accum.push(current);
+    }
+    return accum;
+  }, []);
 }
