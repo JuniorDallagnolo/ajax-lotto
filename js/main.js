@@ -1,4 +1,4 @@
-const LNK = 'https://griffis.edumedia.ca/mad9014/lotto/nums.php';
+const LNK = 'http://localhost/mad9014-lotto/nums.php';
 var numsArray = [];
 
 //Event Handlers
