@@ -4,8 +4,8 @@ document.addEventListener('DOMContentLoaded', init);
 
 //Event Handlers and INIT FUNCTION
 function init() {
-  document.getElementById('btnSend').addEventListener('click', genNumbers);
-  document.getElementById('btnBack').addEventListener('click', refresh);
+  document.getElementById('btnSend').addEventListener('click', swScreen);
+  document.getElementById('btnBack').addEventListener('click', swScreen);
 }
 
 //MAIN FUNCTION TO GENERATE LOTTERY NUMBERS ON USER BUTTON CLICK
@@ -22,13 +22,27 @@ function genNumbers() {
   }
 
 }
-// FUNCTION TO CHANGE THE PAGE BACK TO DEFAULT
-function refresh() {
-  document.getElementById('duplicate').innerHTML = "";
-  document.querySelector('.num_list').innerHTML = "";
-  document.getElementById('list').classList.toggle('active');
-  document.getElementById('home').classList.toggle('active');
+
+// FUNCTION TO CHANGE THE PAGE SCREEN
+function swScreen(ev) {
+  
+  //document.querySelector('')
+  
+  switch (ev.target.id) {
+    case 'btnSend':
+      document.getElementById('home').classList.toggle('active');
+      document.getElementById('list').classList.toggle('active');
+      genNumbers();
+      break;
+    case 'btnBack':
+      document.getElementById('home').classList.toggle('active');
+      document.getElementById('list').classList.toggle('active');
+      document.getElementById('duplicate').innerHTML = "";
+      document.querySelector('.num_list').innerHTML = "";
+      break;
+  }
 }
+
 // FUNCTION TO GENERATE A NEW FORM AND REQUEST
 function genReq(dig, rng) {
   let form = new FormData();
@@ -68,14 +82,13 @@ function fetchArray(request) {
 function genList(someArray) {
   let ul = document.querySelector('.num_list')
   let newDF = new DocumentFragment();
-  someArray.forEach((num) => {
+  someArray.forEach(num => {
     let li = document.createElement('li');
     li.textContent = num;
     newDF.appendChild(li);
   });
   ul.appendChild(newDF);
-  document.getElementById('home').classList.toggle('active');
-  document.getElementById('list').classList.toggle('active');
+  swScreen();
 }
 
 //FUNCTION TO FILTER DUPLICATES VALUE FROM ANY ARRAY
@@ -87,3 +100,4 @@ Array.prototype.unique = function () {
     return accum;
   }, []);
 }
+
