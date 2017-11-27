@@ -25,9 +25,6 @@ function genNumbers() {
 
 // FUNCTION TO CHANGE THE PAGE SCREEN
 function swScreen(ev) {
-  
-  //document.querySelector('')
-  
   switch (ev.target.id) {
     case 'btnSend':
       document.getElementById('home').classList.toggle('active');
