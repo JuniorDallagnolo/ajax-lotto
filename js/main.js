@@ -20,7 +20,7 @@ function genNumbers() {
   let req = new Request(LNK, {
     method: 'POST',
     body:form,
-    mode:'cors'
+    mode:'no-cors'
   });
   fetch(req)
     .then((response) => {
