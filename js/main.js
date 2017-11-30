@@ -108,7 +108,7 @@ function genList() {
   ul.appendChild(newDF);
 }
 
-//FUNCTION TO FILTER DUPLICATES VALUE FROM ANY ARRAY
+//FUNCTION TO FILTER DUPLICATES VALUE FROM ANY ARRAY NOT USED ANYMORE BUT STILL GOOD FOR FUTURE USE
 Array.prototype.unique = function () {
   return this.reduce(function (accum, current) {
     if (accum.indexOf(current) < 0) {
