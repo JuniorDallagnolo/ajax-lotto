@@ -21,7 +21,7 @@ function genNumbers(ev) {
       break;
     case max >= digits:
       flag = true;
-      let req = genReq(digits,max);
+      let req = genReq(digits, max);
       fetchFunc(req, flag);
       swScreen(ev);
       break;
@@ -67,13 +67,14 @@ function fetchFunc(request, bool) {
     })
     .then((jsonData) => {
       if (jsonData.code == 0) {
-        numsArray += jsonData.numbers.unique();
-        if (bool) {
+        numsArray += jsonData.numbers;
+        console.log(numsArray);
+        if (bool && numsArray.length < digits) {
           let newDigits = numsArray.length - digits;
-          let newReq = genReq(newDigits,max);
+          let newReq = genReq(newDigits, max);
           fetchFunc(newReq, bool);
         } else {
-          genList(numsArray);
+          genList();
         }
         // COULD NOT MAKE THIS TERNARY WORK SO USED NORMAL IF ELSE if you can I would like to know what's wrong there, tried so many things.
         //        bool ? (
@@ -92,10 +93,11 @@ function fetchFunc(request, bool) {
 }
 
 //FUNCTION TO Generate Document Fragment
-function genList(someArray) {
+function genList() {
   let ul = document.querySelector('.num_list')
   let newDF = new DocumentFragment();
-  someArray.forEach(num => {
+  console.log(numsArray);
+  numsArray.forEach(num => {
     let li = document.createElement('li');
     li.textContent = num;
     newDF.appendChild(li);
