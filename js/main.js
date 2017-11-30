@@ -67,6 +67,7 @@ function fetchFunc(request, bool) {
     })
     .then((jsonData) => {
       if (jsonData.code == 0) {
+        console.dir(numsArray);
         numsArray += jsonData.numbers;
         console.log(numsArray);
         if (bool && numsArray.length < digits) {
@@ -97,6 +98,7 @@ function genList() {
   let ul = document.querySelector('.num_list')
   let newDF = new DocumentFragment();
   console.log(numsArray);
+  console.dir(numsArray);
   numsArray.forEach(num => {
     let li = document.createElement('li');
     li.textContent = num;
