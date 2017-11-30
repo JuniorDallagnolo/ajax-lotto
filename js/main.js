@@ -22,7 +22,7 @@ function genNumbers(ev) {
     case max >= digits:
       flag = true;
       let req = genReq(digits, max);
-      fetchFunc(req, flag);
+      fetchFunc(req);
       swScreen(ev);
       break;
     default:
@@ -37,8 +37,9 @@ function swScreen(ev) {
   document.getElementById('home').classList.toggle('active');
   document.getElementById('list').classList.toggle('active');
   if (ev.target.id == 'btnBack') {
-    document.getElementById('duplicate').innerHTML = "",
-      document.querySelector('.num_list').innerHTML = ""
+    document.getElementById('duplicate').innerHTML = "";
+    document.querySelector('.num_list').innerHTML = "";
+    numsArray = [];
   }
 }
 
@@ -56,7 +57,7 @@ function genReq(dig, rng) {
 }
 
 // FUNCTION TO GENERATE THE REQUESTED NUMBERS ARRAY
-function fetchFunc(request, bool) {
+function fetchFunc(request) {
   fetch(request)
     .then((response) => {
       if (response.ok) {
@@ -67,13 +68,15 @@ function fetchFunc(request, bool) {
     })
     .then((jsonData) => {
       if (jsonData.code == 0) {
-        console.dir(numsArray);
-        numsArray += jsonData.numbers;
-        console.log(numsArray);
-        if (bool && numsArray.length < digits) {
-          let newDigits = numsArray.length - digits;
+        jsonData.numbers.forEach(num => {
+          if (!numsArray.includes(num)) {
+            numsArray.push(num);
+          }
+        });
+        if (flag && numsArray.length < digits) {
+          let newDigits = digits - numsArray.length;
           let newReq = genReq(newDigits, max);
-          fetchFunc(newReq, bool);
+          fetchFunc(newReq);
         } else {
           genList();
         }
@@ -97,8 +100,6 @@ function fetchFunc(request, bool) {
 function genList() {
   let ul = document.querySelector('.num_list')
   let newDF = new DocumentFragment();
-  console.log(numsArray);
-  console.dir(numsArray);
   numsArray.forEach(num => {
     let li = document.createElement('li');
     li.textContent = num;
