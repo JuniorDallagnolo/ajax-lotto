@@ -1,42 +1,43 @@
 const LNK = 'http://localhost/mad9014-lotto/nums.php';
 var numsArray = [];
+var digits = 0;
+var max = 0;
+var flag = false;
 document.addEventListener('DOMContentLoaded', init);
 
 //Event Handlers and INIT FUNCTION
 function init() {
-  document.getElementById('btnSend').addEventListener('click', swScreen);
+  document.getElementById('btnSend').addEventListener('click', genNumbers);
   document.getElementById('btnBack').addEventListener('click', swScreen);
 }
 
-//MAIN FUNCTION TO GENERATE LOTTERY NUMBERS ON USER BUTTON CLICK
-function genNumbers() {
-  let digits = document.getElementById('digits').value;
-  let max = parseInt(document.getElementById('max').value);
-  if (max >= digits) {
-    console.log("Not Yet");
-  } else {
-    numsArray = fetchArray(genReq(digits, max));
-    console.log(numsArray);
-    genList(numsArray);
-    document.getElementById('duplicate').textContent = "Some of the numbers got duplicates: the range you choose is less than the number of digits."
+//EVENT FUNCTION TO HANDLE ERRORS AND FETCH
+function genNumbers(ev) {
+  digits = parseInt(document.getElementById('digits').value);
+  max = parseInt(document.getElementById('max').value);
+  switch (true) {
+    case isNaN(digits) || isNaN(max) || digits.trim() == "" || max.trim() == "":
+      alert("Please Fill both values with a numerial value.");
+      break;
+    case max >= digits:
+      flag = true;
+      fetchFunc(genReq(digits, max), flag);
+      swScreen(ev);
+      break;
+    default:
+      document.getElementById('duplicate').textContent = "Some of the numbers got duplicates: the range you choose is less than the number of digits."
+      fetchFunc(genReq(digits, max), flag);
+      swScreen(ev);
   }
-
 }
 
 // FUNCTION TO CHANGE THE PAGE SCREEN
 function swScreen(ev) {
-  switch (ev.target.id) {
-    case 'btnSend':
-      document.getElementById('home').classList.toggle('active');
-      document.getElementById('list').classList.toggle('active');
-      genNumbers();
-      break;
-    case 'btnBack':
-      document.getElementById('home').classList.toggle('active');
-      document.getElementById('list').classList.toggle('active');
-      document.getElementById('duplicate').innerHTML = "";
-      document.querySelector('.num_list').innerHTML = "";
-      break;
+  document.getElementById('home').classList.toggle('active');
+  document.getElementById('list').classList.toggle('active');
+  if (ev.target.id == 'btnBack') {
+    document.getElementById('duplicate').innerHTML = "",
+    document.querySelector('.num_list').innerHTML = ""
   }
 }
 
@@ -52,9 +53,10 @@ function genReq(dig, rng) {
   });
   return req;
 }
+
 // FUNCTION TO GENERATE THE REQUESTED NUMBERS ARRAY
-function fetchArray(request) {
-  return fetch(request)
+function fetchFunc(request, bool) {
+  fetch(request)
     .then((response) => {
       if (response.ok) {
         return response.json();
@@ -64,8 +66,13 @@ function fetchArray(request) {
     })
     .then((jsonData) => {
       if (jsonData.code == 0) {
-        let arr = jsonData.numbers.slice();
-        return arr;
+        numsArray += jsonData.unique();
+        bool ? (
+          let newDigits = numsArray.length - digits,
+            fetchFunc(genReq(newDigits, max), bool)
+        ) : (
+          genList(numsArray)
+        );
       } else {
         throw new Error(jsonData.message);
       };
@@ -85,7 +92,6 @@ function genList(someArray) {
     newDF.appendChild(li);
   });
   ul.appendChild(newDF);
-  swScreen();
 }
 
 //FUNCTION TO FILTER DUPLICATES VALUE FROM ANY ARRAY
@@ -97,4 +103,3 @@ Array.prototype.unique = function () {
     return accum;
   }, []);
 }
-
