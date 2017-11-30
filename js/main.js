@@ -16,16 +16,17 @@ function genNumbers(ev) {
   digits = parseInt(document.getElementById('digits').value);
   max = parseInt(document.getElementById('max').value);
   switch (true) {
-    case isNaN(digits) || isNaN(max) || digits.trim() == "" || max.trim() == "":
+    case isNaN(digits) || isNaN(max) || digits == "" || max == "":
       alert("Please Fill both values with a numerial value.");
       break;
     case max >= digits:
       flag = true;
-      fetchFunc(genReq(digits, max), flag);
+      let req = genReq(digits,max);
+      fetchFunc(req, flag);
       swScreen(ev);
       break;
     default:
-      document.getElementById('duplicate').textContent = "Some of the numbers got duplicates: the range you choose is less than the number of digits."
+      document.getElementById('duplicate').textContent = "Duplicate number values were hidden. Try a new search with a higher range to avoid that"
       fetchFunc(genReq(digits, max), flag);
       swScreen(ev);
   }
@@ -37,7 +38,7 @@ function swScreen(ev) {
   document.getElementById('list').classList.toggle('active');
   if (ev.target.id == 'btnBack') {
     document.getElementById('duplicate').innerHTML = "",
-    document.querySelector('.num_list').innerHTML = ""
+      document.querySelector('.num_list').innerHTML = ""
   }
 }
 
@@ -66,13 +67,21 @@ function fetchFunc(request, bool) {
     })
     .then((jsonData) => {
       if (jsonData.code == 0) {
-        numsArray += jsonData.unique();
-        bool ? (
-          let newDigits = numsArray.length - digits,
-            fetchFunc(genReq(newDigits, max), bool)
-        ) : (
-          genList(numsArray)
-        );
+        numsArray += jsonData.numbers.unique();
+        if (bool) {
+          let newDigits = numsArray.length - digits;
+          let newReq = genReq(newDigits,max);
+          fetchFunc(newReq, bool);
+        } else {
+          genList(numsArray);
+        }
+        // COULD NOT MAKE THIS TERNARY WORK SO USED NORMAL IF ELSE if you can I would like to know what's wrong there, tried so many things.
+        //        bool ? (
+        //          let newDigits = numsArray.length - digits,
+        //            fetchFunc(genReq(newDigits, max), bool)
+        //        ) : (
+        //          genList(numsArray)
+        //        );
       } else {
         throw new Error(jsonData.message);
       };
