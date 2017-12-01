@@ -100,6 +100,7 @@ function fetchFunc(request) {
 function genList() {
   let ul = document.querySelector('.num_list')
   let newDF = new DocumentFragment();
+  numsArray.sort();
   numsArray.forEach(num => {
     let li = document.createElement('li');
     li.textContent = num;
