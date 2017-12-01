@@ -1,4 +1,4 @@
-const LNK = 'http://localhost/mad9014-lotto/nums.php';
+const LNK = 'https://localhost/mad9014-lotto/nums.php';
 var numsArray = [];
 var digits = 0;
 var max = 0;
